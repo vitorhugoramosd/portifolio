@@ -5,7 +5,7 @@ const CONFIG = {
   github: 'vitorhugoramosd',
   emailUser: 'vitorhugoramosdossantos',
   emailHost: 'gmail.com',
-  linkedin: '', // cole aqui a URL do seu LinkedIn para o ícone e o botão aparecerem
+  linkedin: 'https://www.linkedin.com/in/vhrdossantos/',
 };
 
 const STACK = ['C#', 'VB.NET', '.NET', 'LinqToDB', 'SQL', 'PostgreSQL', 'Java', 'Spring Boot', 'JavaScript', 'TypeScript', 'React', 'Electron', 'Python', 'Git', 'Docker'];
