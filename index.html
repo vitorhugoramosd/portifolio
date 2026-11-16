@@ -3,189 +3,158 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vitor Hugo Ramos — Documento Auxiliar de Portfólio</title>
-<meta name="description" content="Portfólio de Vitor Hugo Ramos, desenvolvedor de software em ERP de grande porte (C# / VB.NET), emitido em formato de documento fiscal. Contém 5 defeitos de emissão: localize-os.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23fdfdfb'/%3E%3Crect x='3' y='3' width='58' height='58' fill='none' stroke='%23141414' stroke-width='4'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='28' font-weight='700' text-anchor='middle' fill='%23c4112b'%3EVH%3C/text%3E%3C/svg%3E">
+<title>Vitor Hugo Ramos — Desenvolvedor de Software</title>
+<meta name="description" content="Portfólio de Vitor Hugo Ramos, desenvolvedor de software em ERP de grande porte (C# / VB.NET) e pesquisador de LLMs aplicados à manutenção de software.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231f3cff'/%3E%3Ctext x='32' y='44' font-family='Arial' font-size='30' font-weight='800' text-anchor='middle' fill='%23fff'%3Evh%3C/text%3E%3C/svg%3E">
+<script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="qa" id="qa">
-  <span class="qa-msg" id="qaMsg"><b>Controle de qualidade:</b> este documento foi emitido com 5 defeitos. Achou algo estranho? Clique em cima.</span>
-  <span class="qa-count" id="qaCount" aria-live="polite">0/5</span>
-  <button type="button" id="hintBtn">Dica</button>
-  <button type="button" id="printBtn">Imprimir currículo</button>
-</div>
-
-<main class="sheet" id="sheet">
-
-  <!-- CANHOTO -->
-  <div class="g stub no-print">
-    <div class="stub-left">
-      <div class="b"><span class="l">Recebemos de Vitor Hugo Ramos os projetos e as competências constantes do documento indicado ao lado</span></div>
-      <div class="stub-in">
-        <div class="b"><span class="l">Data de recebimento</span><div class="v" id="recvDate">—</div></div>
-        <div class="b"><label class="l" for="sign">Identificação e assinatura do recebedor (pode assinar)</label><input class="sign" id="sign" maxlength="40" placeholder="assine aqui" autocomplete="off" spellcheck="false"></div>
-      </div>
-    </div>
-    <div class="b stub-no"><b>DAPORT</b><span>Nº 000.023<br>Série 1</span></div>
+<header class="nav">
+  <a class="nav-name" href="#topo">Vitor Hugo Ramos</a>
+  <nav class="nav-links" id="navLinks" aria-label="Seções">
+    <a href="#sobre">Sobre</a>
+    <a href="#trajetoria">Trajetória</a>
+    <a href="#projetos">Projetos</a>
+    <a href="#pesquisa">Pesquisa</a>
+    <a href="#contato">Contato</a>
+  </nav>
+  <div class="nav-meta">
+    <span class="clock">Brasília <span id="clock">--:--</span></span>
+    <button class="theme" id="themeBtn" type="button" aria-label="Alternar tema claro e escuro"><i></i></button>
   </div>
-  <div class="cut no-print">✂</div>
+</header>
 
-  <!-- EMITENTE -->
-  <div class="g head">
-    <div class="b emit">
-      <img src="https://avatars.githubusercontent.com/u/127155752?v=4" alt="Foto de Vitor Hugo Ramos" width="104" height="128">
+<main id="topo">
+
+  <section class="hero wrap-x">
+    <div class="hero-top">
+      <p class="label">Desenvolvedor de software · Prosyst Sistemas</p>
+      <p class="label avail">Aberto a conversas</p>
+    </div>
+    <h1>
+      <span>Vitor Hugo</span>
+      <span class="l2">Ramos<span class="ph"><img src="https://avatars.githubusercontent.com/u/127155752?v=4" alt="Foto de Vitor Hugo Ramos" width="460" height="460"></span></span>
+    </h1>
+    <div class="hero-grid">
+      <p class="big">Mantenho e evoluo um ERP de grande porte em <em>C#</em> e <em>VB.NET</em>, e pesquiso até onde os modelos de linguagem conseguem achar defeitos em código legado.</p>
       <div>
-        <h1>Vitor Hugo<br>Ramos</h1>
-        <p>Desenvolvedor de Software<br>Prosyst Sistemas · ERP de grande porte<br><a href="https://github.com/vitorhugoramosd" target="_blank" rel="noopener">github.com/vitorhugoramosd</a></p>
+        <p class="label">Agora</p>
+        <p>Correção de defeitos, regras de negócio e telas novas num sistema que roda a operação de empresas de verdade.</p>
+      </div>
+      <ul class="links">
+        <li><a href="#projetos">Projetos <span>↓</span></a></li>
+        <li><a href="caca-bug/">Jogar Caça-Bug <span>→</span></a></li>
+        <li><a href="https://github.com/vitorhugoramosd" target="_blank" rel="noopener">GitHub <span>↗</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-in" id="marquee"></div></div>
+
+  <section class="sec wrap-x" id="sobre">
+    <div class="sec-h"><span class="n">01</span><h2>Sobre</h2></div>
+    <div>
+      <p class="state">Comecei no <em>suporte técnico</em> do mesmo ERP em que hoje programo. Ver de perto o impacto de cada problema no cliente mudou a forma como eu escrevo código.</p>
+      <div class="cols">
+        <p>Hoje atuo na manutenção e evolução do sistema: correção de bugs, ajustes em regras de negócio, criação de telas e investigação de problemas em produção. É uma base de código extensa, com regras de negócio separadas da interface, ORM baseado em LinqToDB e fluxo de Merge Requests, revisão de código e cherry-pick entre branches de release.</p>
+        <p>Fora do trabalho, construo coisas que eu mesmo uso: um launcher de jogos controlado pelo joystick, um painel pessoal que abre com o Windows, um app contra desperdício de comida. Quero seguir evoluindo no back-end, em arquitetura, banco de dados e qualidade de software.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="nRepos">23</b><span>repositórios públicos</span></div>
+        <div class="stat"><b id="nLangs">6</b><span>linguagens em uso</span></div>
+        <div class="stat"><b>2</b><span>papéis no mesmo ERP: suporte e desenvolvimento</span></div>
       </div>
     </div>
-    <div class="b doc">
-      <b>DAPORT</b>
-      <small>Documento Auxiliar<br>de Portfólio</small>
-      <div class="es"><span>0 - Entrada<br>1 - Saída</span><i>1</i></div>
-      <div class="no">Nº 000.023 · Série 1<br>Folha
-        <button type="button" class="bug" data-id="folha" data-what="Folha 1/0: divisão por zero"><span class="bad">1/0</span><span class="good">1/1</span></button><span class="pen">÷ 0 ?!</span>
+  </section>
+
+  <section class="sec wrap-x" id="trajetoria">
+    <div class="sec-h"><span class="n">02</span><h2>Trajetória</h2></div>
+    <ol class="path">
+      <li>
+        <span class="when">Atual</span>
+        <h3>Desenvolvedor de Software<small>Prosyst Sistemas</small></h3>
+        <p>Manutenção e evolução de um ERP de grande porte em C# e VB.NET: correção de defeitos, regras de negócio, telas novas e investigação de problemas em produção.</p>
+      </li>
+      <li>
+        <span class="when">Antes</span>
+        <h3>Analista de Suporte Técnico<small>Prosyst Sistemas</small></h3>
+        <p>Atendimento e diagnóstico junto aos clientes do ERP. Foi onde aprendi a ler um problema pelo lado de quem usa o sistema, e a achar a causa antes de propor a correção.</p>
+      </li>
+      <li>
+        <span class="when">Formação</span>
+        <h3>Engenharia de Software<small>Univille · Bacharelado</small></h3>
+        <p>Projetos em Java e Spring Boot (microsserviços, arquitetura hexagonal, JPA, JWT) e TCC em 2026 sobre LLMs na localização de falhas em C#.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="sec wrap-x" id="projetos">
+    <div class="sec-h"><span class="n">03</span><h2>Projetos</h2></div>
+    <div>
+      <div class="filters" id="filters" role="group" aria-label="Filtrar projetos por linguagem"></div>
+      <ul class="plist" id="plist"></ul>
+    </div>
+  </section>
+
+  <section class="research wrap-x" id="pesquisa">
+    <p class="label">04 · Pesquisa · TCC · Univille · 2026</p>
+    <h2>LLMs conseguem achar o bug em código C#?</h2>
+    <div class="r-grid">
+      <div>
+        <p>Antes de corrigir um defeito, alguém precisa descobrir onde ele está. Os resultados publicados com modelos de linguagem são animadores, mas quase todos vêm de projetos Java e Python bem testados.</p>
+        <p>Meu TCC mede o que acontece em C#, comparando código com testes automatizados e código legado, sem testes.</p>
+        <ul>
+          <li>Entrada: só o relato do problema (a issue)</li>
+          <li>Métricas: Top-N e Mean Reciprocal Rank, por arquivo e por método</li>
+          <li>Execução piloto publicada inteira: scripts, consultas, respostas e métricas</li>
+        </ul>
+        <div class="cta">
+          <a class="btn primary" href="https://github.com/vitorhugoramosd/tcc-llm-localizacao-falhas-csharp" target="_blank" rel="noopener">Repositório do TCC ↗</a>
+          <a class="btn" href="caca-bug/">Tente você: Caça-Bug →</a>
+        </div>
+      </div>
+      <div class="sim">
+        <h3>Como o MRR funciona</h3>
+        <p>Marque em que posição do ranking o modelo colocou o arquivo com o defeito.</p>
+        <div id="mrrRows"></div>
+        <div class="mrr-out"><span>MRR</span><b id="mrrVal">0,000</b></div>
+        <p class="note" id="mrrNote"></p>
       </div>
     </div>
-    <div class="b key">
-      <div class="bars" id="bars" aria-hidden="true"></div>
-      <span class="l">Chave de acesso</span>
-      <div class="v" id="chave">4226 1112 7155 7520 0001 5500 1000 0000 2310 0020 2611</div>
-      <small>Consulta de autenticidade em<br>github.com/vitorhugoramosd</small>
+  </section>
+
+  <section class="sec wrap-x" id="github">
+    <div class="sec-h"><span class="n">05</span><h2>GitHub, ao vivo</h2></div>
+    <div>
+      <div class="langbar" id="langBar" aria-hidden="true"></div>
+      <div class="legend" id="legend"></div>
+      <ul class="repos" id="repos"><li><a>Carregando repositórios…</a></li></ul>
     </div>
-  </div>
+  </section>
 
-  <div class="g c4">
-    <div class="b span3"><span class="l">Natureza da operação</span><div class="v big">Manutenção e evolução de ERP em C# e VB.NET</div></div>
-    <div class="b"><span class="l">Protocolo de autorização de uso</span><div class="v">Aberto a conversas</div></div>
-    <div class="b"><span class="l">Cargo</span><div class="v">Desenvolvedor de Software</div></div>
-    <div class="b"><span class="l">Empresa</span><div class="v">Prosyst Sistemas</div></div>
-    <div class="b"><span class="l">Formação</span><div class="v">Eng. de Software · Univille</div></div>
-    <div class="b"><span class="l">Origem</span><div class="v">Suporte técnico do mesmo ERP</div></div>
-  </div>
-
-  <!-- DESTINATÁRIO -->
-  <div class="st no-print">Destinatário / remetente</div>
-  <div class="g c4 no-print">
-    <div class="b span2"><span class="l">Nome / razão social</span><div class="v big">
-      <button type="button" class="bug" data-id="nome" data-what="Campo sem preencher: {destinatario.Nome}"><span class="bad">{destinatario.Nome}</span><span class="good" id="destNome">Você</span></button><span class="pen">faltou interpolar</span>
-    </div></div>
-    <div class="b"><span class="l">Data de emissão</span><div class="v">
-      <button type="button" class="bug" data-id="data" data-what="Data de emissão em 31 de fevereiro"><span class="bad" id="badDate">31/02/2026</span><span class="good" id="goodDate"></span></button><span class="pen">fevereiro?</span>
-    </div></div>
-    <div class="b"><span class="l">Hora da saída</span><div class="v" id="clock">--:--:--</div></div>
-    <div class="b span2"><span class="l">Motivo da visita</span><div class="v">Recrutamento, curiosidade ou caça a defeitos</div></div>
-    <div class="b span2"><span class="l">Instruções</span><div class="v">Clique nos itens para abrir. Confira tudo.</div></div>
-  </div>
-
-  <!-- TRAJETÓRIA -->
-  <div class="st">Fatura / trajetória</div>
-  <div class="g c3 dup">
-    <div class="b"><span class="l">001 · Atual</span><h3>Desenvolvedor de Software</h3><div class="v">Prosyst Sistemas</div><p>Correção de defeitos, regras de negócio, telas novas e investigação de problemas em produção, numa base extensa em C# e VB.NET com LinqToDB, Merge Requests e cherry-pick entre releases.</p></div>
-    <div class="b"><span class="l">002 · Antes</span><h3>Analista de Suporte Técnico</h3><div class="v">Prosyst Sistemas</div><p>Atendimento e diagnóstico junto aos clientes do ERP. Foi onde aprendi a ler um problema pelo lado de quem usa o sistema, e a achar a causa antes de propor a correção.</p></div>
-    <div class="b"><span class="l">003 · Formação</span><h3>Engenharia de Software</h3><div class="v">Univille · Bacharelado</div><p>Projetos em Java e Spring Boot (microsserviços, arquitetura hexagonal, JPA, JWT) e TCC em 2026 sobre LLMs na localização de falhas em C#.</p></div>
-  </div>
-
-  <!-- NÚMEROS -->
-  <div class="st">Cálculo do portfólio</div>
-  <div class="g c5">
-    <div class="b"><span class="l">Repositórios públicos</span><div class="v big r" id="nRepos">23</div></div>
-    <div class="b"><span class="l">Linguagens em uso</span><div class="v big r" id="nLangs">6</div></div>
-    <div class="b"><span class="l">Papéis no mesmo ERP</span><div class="v big r">2</div></div>
-    <div class="b"><span class="l">Itens neste documento</span><div class="v big r">
-      <button type="button" class="bug" data-id="total" data-what="Total de itens não fecha com a tabela"><span class="bad">9</span><span class="good">10</span></button><span class="pen">conte de novo</span>
-    </div></div>
-    <div class="b"><span class="l">Defeitos localizados por você</span><div class="v big r" id="nBugs">0/5</div></div>
-  </div>
-  <div class="g" id="langRow" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr))"></div>
-
-  <!-- STACK -->
-  <div class="st">Volumes transportados / ferramentas</div>
-  <div class="g c4">
-    <div class="b"><span class="l">Linguagens</span><div class="v">C# · VB.NET · Java · JavaScript · TypeScript · Python · SQL</div></div>
-    <div class="b"><span class="l">Plataformas e frameworks</span><div class="v">.NET · Windows Forms · ASP.NET Core · Spring Boot · React · Electron</div></div>
-    <div class="b"><span class="l">Dados</span><div class="v">LinqToDB · EF Core · PostgreSQL · Supabase</div></div>
-    <div class="b"><span class="l">Fluxo de trabalho</span><div class="v">Git · Merge Requests · revisão de código · Docker</div></div>
-  </div>
-
-  <!-- PROJETOS -->
-  <div class="st" id="projetos">Dados dos produtos / projetos</div>
-  <table class="tbl" id="tbl">
-    <thead>
-      <tr>
-        <th>Cód.</th>
-        <th><button type="button" class="bug" data-id="encoding" data-what="Cabeçalho com acentuação corrompida"><span class="bad">DescriÃ§Ã£o do projeto</span><span class="good">Descrição do projeto</span></button><span class="pen">encoding!</span></th>
-        <th>Linguagem</th>
-        <th class="hide-m">Natureza</th>
-        <th class="hide-m num">Ano</th>
-        <th class="no-print"></th>
-      </tr>
-    </thead>
-    <tbody id="rows"></tbody>
-  </table>
-
-  <!-- PESQUISA -->
-  <div class="st" id="pesquisa">Pesquisa em andamento (TCC)</div>
-  <div class="g c4">
-    <div class="b full"><span class="l">Título</span><div class="v big">Avaliação do desempenho de LLMs na localização de falhas em bases de código C#</div></div>
-    <div class="b"><span class="l">Instituição / ano</span><div class="v">Univille · 2026</div></div>
-    <div class="b"><span class="l">Entrada do modelo</span><div class="v">Só o relato do problema (a issue)</div></div>
-    <div class="b"><span class="l">Métricas</span><div class="v">Top-N e MRR, por arquivo e por método</div></div>
-    <div class="b"><span class="l">Material</span><div class="v"><a href="https://github.com/vitorhugoramosd/tcc-llm-localizacao-falhas-csharp" target="_blank" rel="noopener">repositório do TCC</a></div></div>
-    <div class="b span2 txt">
-      <span class="l">Resumo</span>
-      <p>Antes de corrigir um defeito, alguém precisa descobrir onde ele está. Os resultados publicados com LLMs são animadores, mas quase todos vêm de projetos Java e Python bem testados.</p>
-      <p>Minha pesquisa mede o que acontece em C#, comparando código com testes automatizados e código legado, sem testes. A execução piloto está publicada inteira: scripts, consultas, respostas e métricas.</p>
-      <p class="no-print" style="margin-top:12px"><a class="btn primary" href="caca-bug/">Jogar Caça-Bug</a></p>
+  <section class="contact wrap-x" id="contato">
+    <p class="label">06 · Contato</p>
+    <h2>Vamos<br>conversar<span class="grad">.</span></h2>
+    <a class="mail" id="mail" href="#">e-mail</a>
+    <div class="cta">
+      <button class="btn" id="copyBtn" type="button">Copiar e-mail</button>
+      <a class="btn" href="https://github.com/vitorhugoramosd" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn" id="li" href="#" target="_blank" rel="noopener" hidden>LinkedIn ↗</a>
     </div>
-    <div class="b span2 no-print">
-      <span class="l">Simulador de MRR: em que posição do ranking o modelo colocou o arquivo certo?</span>
-      <div id="mrrRows" style="margin-top:6px"></div>
-      <div class="v big" style="margin-top:8px">MRR = <span id="mrrVal">0.000</span></div>
-      <div class="v" id="mrrNote" style="font-size:12px;color:var(--faint)"></div>
-    </div>
-  </div>
-
-  <!-- MOVIMENTAÇÕES -->
-  <div class="st no-print">Movimentações recentes (direto do GitHub)</div>
-  <table class="tbl no-print">
-    <thead><tr><th>Data</th><th>Repositório</th><th>Linguagem</th></tr></thead>
-    <tbody id="ghRows"><tr><td colspan="3">Consultando…</td></tr></tbody>
-  </table>
-
-  <!-- DADOS ADICIONAIS -->
-  <div class="st" id="contato">Dados adicionais</div>
-  <div class="g c2">
-    <div class="b txt">
-      <span class="l">Informações complementares</span>
-      <p>Comecei no suporte técnico do mesmo ERP em que hoje programo. Ver de perto o impacto de cada problema no cliente mudou a forma como eu escrevo código.</p>
-      <p>Fora do trabalho, construo coisas que eu mesmo uso: um launcher de jogos controlado pelo joystick, um painel pessoal que abre com o Windows, um app contra desperdício de comida. Quero seguir evoluindo no back-end: arquitetura, banco de dados e qualidade de software.</p>
-      <p class="v" style="margin-top:10px">
-        Contato: <a id="mail" href="#">e-mail</a><br>
-        GitHub: <a href="https://github.com/vitorhugoramosd" target="_blank" rel="noopener">github.com/vitorhugoramosd</a>
-        <span id="liWrap" hidden><br>LinkedIn: <a id="li" href="#" target="_blank" rel="noopener">perfil</a></span>
-      </p>
-      <p class="cta no-print" style="margin-top:12px"><button type="button" class="btn" id="copyBtn">Copiar e-mail</button></p>
-    </div>
-    <div class="b stampbox no-print">
-      <span class="l">Reservado ao controle de qualidade</span>
-      <ul class="log" id="log"></ul>
-      <p style="margin:8px 0 0"><button type="button" class="linkbtn" id="resetBtn" hidden>emitir de novo com os defeitos</button></p>
-      <div id="stampSlot"></div>
-    </div>
-  </div>
+  </section>
 </main>
 
 <footer class="foot">
-  <span>Documento sem valor fiscal. É só um portfólio.</span>
-  <span>Emitido em HTML, CSS e JavaScript, sem framework · © <span id="year"></span> Vitor Hugo Ramos</span>
+  <span>© <span id="year"></span> Vitor Hugo Ramos</span>
+  <span>HTML, CSS e JavaScript, sem framework</span>
 </footer>
 
+<div class="peek" id="peek" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status"></div>
 <script src="script.js"></script>
 </body>
