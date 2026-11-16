@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='52'%3E%F0%9F%90%9E%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 <style>
   .wrap { position: relative; z-index: 1; width: min(940px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 60px; }
@@ -55,6 +55,11 @@
   .rounds span { font-family: var(--mono); font-size: 13px; padding: 6px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); }
   .rounds .ok { border-color: var(--a1); color: var(--a1); }
   .rounds .no { border-color: var(--danger); color: var(--danger); }
+  .issue, .code, .feedback, .rule, .rounds span, .progress, .progress i { border-radius: 0; }
+  .progress i { background: var(--a1); }
+  .intro h1, .result h1 { letter-spacing: -.045em; line-height: .98; }
+  .top .brand-dot { color: var(--muted); }
+  .rounds .ok { border-color: #1a8f52; color: #1a8f52; }
   @media (max-width: 700px) { .rules, .scores { grid-template-columns: 1fr; } .code { font-size: 12.5px; } }
 </style>
 </head>
