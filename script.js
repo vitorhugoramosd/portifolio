@@ -43,7 +43,7 @@ const PROJECTS = [
 ];
 
 /* cores das miniaturas, em rodízio: [fundo, texto] */
-const THUMBS = [['#2b3ff2', '#ffffff'], ['#ffd633', '#0d1024'], ['#0d1024', '#ffffff'], ['#e9ebf3', '#0d1024']];
+const THUMBS = [['#2f3a8f', '#ffffff'], ['#f0cf6a', '#0d1024'], ['#0d1024', '#ffffff'], ['#e9ebf3', '#0d1024']];
 
 /* ========================================================= */
 const $ = (s, r = document) => r.querySelector(s);
