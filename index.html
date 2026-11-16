@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vitor Hugo Ramos — Desenvolvedor de Software</title>
+<meta name="description" content="Portfólio de Vitor Hugo Ramos, desenvolvedor de software em ERP de grande porte (C# / VB.NET) e pesquisador de LLMs aplicados à manutenção de software.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="brand" href="#topo" aria-label="Início"><span class="brand-mark">vh</span><span class="brand-dot">.</span>dev</a>
+  <nav class="nav-links" id="navLinks">
+    <a href="#sobre">Sobre</a>
+    <a href="#trajetoria">Trajetória</a>
+    <a href="#projetos">Projetos</a>
+    <a href="#pesquisa">Pesquisa</a>
+    <a href="#terminal">Terminal</a>
+    <a href="#contato">Contato</a>
+  </nav>
+  <div class="nav-actions">
+    <button class="icon-btn" id="themeBtn" aria-label="Alternar tema claro/escuro" title="Alternar tema">◐</button>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main id="topo">
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="net" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <p class="eyebrow"><span class="pulse"></span> Desenvolvedor de Software · Prosyst Sistemas</p>
+      <h1>Vitor Hugo<br><span class="grad">Ramos</span></h1>
+      <p class="typed-line"><span class="prompt">&gt;</span> <span id="typed"></span><span class="caret">▍</span></p>
+      <p class="lead">Mantenho e evoluo um ERP de grande porte em <strong>C#</strong> e <strong>VB.NET</strong> — e pesquiso até onde os modelos de linguagem conseguem encontrar defeitos em código legado.</p>
+      <div class="cta">
+        <a class="btn primary" href="#projetos">Ver projetos</a>
+        <a class="btn" href="caca-bug/">Jogar Caça-Bug 🐞</a>
+        <a class="btn ghost" href="https://github.com/vitorhugoramosd" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+    <a class="scroll-hint" href="#sobre" aria-label="Rolar para a seção Sobre">role ↓</a>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="section">
+    <div class="section-head reveal">
+      <span class="tag">01</span><h2>Sobre mim</h2>
+    </div>
+    <div class="about">
+      <div class="about-photo reveal">
+        <div class="photo-frame">
+          <img src="https://avatars.githubusercontent.com/u/127155752?v=4" alt="Foto de Vitor Hugo Ramos" width="320" height="320" loading="lazy">
+        </div>
+        <ul class="facts">
+          <li><span>💼</span> Dev em ERP de grande porte</li>
+          <li><span>🎓</span> Eng. de Software · Univille</li>
+          <li><span>🔬</span> TCC sobre LLMs e bugs em C#</li>
+          <li><span>🎮</span> Games, rock e Corinthians</li>
+        </ul>
+      </div>
+      <div class="about-text reveal">
+        <p class="big">Comecei no <strong>suporte técnico</strong> do mesmo ERP em que hoje programo. Ver de perto o impacto de cada problema no cliente mudou a forma como eu escrevo código.</p>
+        <p>Hoje atuo como desenvolvedor na manutenção e evolução do sistema: correção de bugs, ajustes em regras de negócio, criação de telas e investigação de problemas em ambientes produtivos. Trabalho em uma base de código extensa, com camada de regras de negócio separada da interface, ORM baseado em LinqToDB e fluxo de Merge Requests, revisão de código e cherry-pick entre branches de release.</p>
+        <p>Fora do trabalho, gosto de construir coisas que eu mesmo uso: um launcher de jogos controlado pelo joystick, um painel pessoal estilo HUD, um app contra desperdício de comida. Meu objetivo é seguir evoluindo como desenvolvedor back-end, aprofundando arquitetura, banco de dados e qualidade de software.</p>
+        <div class="stats">
+          <div class="stat"><b data-count="23" id="statRepos">0</b><span>repositórios públicos</span></div>
+          <div class="stat"><b data-count="6">0</b><span>linguagens em uso</span></div>
+          <div class="stat"><b data-count="2">0</b><span>papéis no mesmo ERP</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack reveal">
+      <h3>Ferramentas do dia a dia</h3>
+      <div class="chips" id="stackChips"></div>
+    </div>
+  </section>
+
+  <!-- TRAJETÓRIA -->
+  <section id="trajetoria" class="section">
+    <div class="section-head reveal">
+      <span class="tag">02</span><h2>Trajetória</h2>
+    </div>
+    <ol class="timeline">
+      <li class="reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-when">Atual</span>
+          <h3>Desenvolvedor de Software <em>· Prosyst Sistemas</em></h3>
+          <p>Manutenção e evolução de um ERP de grande porte em C# e VB.NET: correção de defeitos, regras de negócio, telas novas e investigação de problemas em produção.</p>
+          <div class="mini-chips"><span>C#</span><span>VB.NET</span><span>.NET</span><span>LinqToDB</span><span>SQL</span><span>Git · Merge Requests</span></div>
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-when">Antes</span>
+          <h3>Analista de Suporte Técnico <em>· Prosyst Sistemas</em></h3>
+          <p>Atendimento e diagnóstico junto aos clientes do ERP. Foi onde aprendi a ler um problema do ponto de vista de quem usa o sistema — e a descobrir a causa antes de propor a correção.</p>
+          <div class="mini-chips"><span>Diagnóstico</span><span>Regras de negócio</span><span>SQL</span><span>Relacionamento com cliente</span></div>
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-when">Formação</span>
+          <h3>Bacharelado em Engenharia de Software <em>· Univille</em></h3>
+          <p>Projetos acadêmicos com Java e Spring Boot (microsserviços, arquitetura hexagonal, JPA, JWT) e TCC em 2026 sobre LLMs na localização de falhas em C#.</p>
+          <div class="mini-chips"><span>Java</span><span>Spring Boot</span><span>Arquitetura</span><span>Pesquisa empírica</span></div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- PROJETOS -->
+  <section id="projetos" class="section">
+    <div class="section-head reveal">
+      <span class="tag">03</span><h2>Projetos</h2>
+    </div>
+    <p class="section-sub reveal">Do ERP de mentira ao launcher de jogos de verdade. Filtre por tecnologia:</p>
+    <div class="filters reveal" id="filters" role="group" aria-label="Filtrar projetos por tecnologia"></div>
+    <div class="grid" id="projectGrid"></div>
+
+    <div class="gh reveal">
+      <div class="gh-head">
+        <h3>Ao vivo do GitHub</h3>
+        <a href="https://github.com/vitorhugoramosd?tab=repositories" target="_blank" rel="noopener">ver todos ↗</a>
+      </div>
+      <div class="lang-bar" id="langBar" aria-hidden="true"></div>
+      <div class="lang-legend" id="langLegend"></div>
+      <ul class="gh-list" id="ghList"><li class="muted">Carregando repositórios…</li></ul>
+    </div>
+  </section>
+
+  <!-- PESQUISA -->
+  <section id="pesquisa" class="section">
+    <div class="section-head reveal">
+      <span class="tag">04</span><h2>Pesquisa</h2>
+    </div>
+    <div class="research reveal">
+      <div class="research-text">
+        <p class="kicker">TCC · Univille · 2026</p>
+        <h3>Avaliação do desempenho de LLMs na localização de falhas em bases de código C#</h3>
+        <p>Antes de corrigir um bug, é preciso descobrir <em>onde</em> ele está. Os resultados publicados com LLMs são animadores, mas quase todos vêm de projetos Java e Python bem testados. Minha pesquisa mede o que acontece em C# — comparando código com testes automatizados e código legado, sem testes.</p>
+        <ul class="ticks">
+          <li>Entrada: apenas o relato do problema (a issue)</li>
+          <li>Métricas: Top-N e Mean Reciprocal Rank, por arquivo e por método</li>
+          <li>Execução piloto reprodutível, com scripts, consultas e respostas publicados</li>
+        </ul>
+        <div class="cta">
+          <a class="btn primary" href="https://github.com/vitorhugoramosd/tcc-llm-localizacao-falhas-csharp" target="_blank" rel="noopener">Repositório do TCC ↗</a>
+          <a class="btn" href="caca-bug/">Sinta na pele: Caça-Bug</a>
+        </div>
+      </div>
+      <div class="mrr" aria-label="Demonstração interativa da métrica MRR">
+        <p class="mrr-title">Como funciona o MRR?</p>
+        <p class="mrr-sub">Clique na posição em que o arquivo com o defeito apareceu no ranking do modelo:</p>
+        <div class="mrr-rows" id="mrrRows"></div>
+        <div class="mrr-out">
+          <span>MRR =</span><b id="mrrVal">0.000</b>
+        </div>
+        <p class="mrr-note" id="mrrNote">Média de 1/posição. Quanto mais perto de 1, mais cedo o modelo acerta.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERMINAL -->
+  <section id="terminal" class="section">
+    <div class="section-head reveal">
+      <span class="tag">05</span><h2>Terminal</h2>
+    </div>
+    <p class="section-sub reveal">Prefere linha de comando? Digite <code>ajuda</code>.</p>
+    <div class="term reveal" id="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>vitor@portfolio: ~</span></div>
+      <div class="term-body" id="termBody" aria-live="polite"></div>
+      <label class="term-input">
+        <span class="prompt">vitor@portfolio:~$</span>
+        <input id="termIn" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Comando do terminal">
+      </label>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="section contact">
+    <div class="reveal">
+      <p class="kicker">06 · Contato</p>
+      <h2 class="contact-title">Vamos <span class="grad">conversar</span>?</h2>
+      <p class="lead">Aberto a trocar ideia sobre .NET, sistemas legados, ERPs e IA aplicada à manutenção de software.</p>
+      <div class="cta center">
+        <a class="btn primary" id="mailBtn" href="#">Enviar e-mail</a>
+        <button class="btn" id="copyBtn" type="button">Copiar e-mail</button>
+        <a class="btn ghost" href="https://github.com/vitorhugoramosd" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn ghost" id="linkedinBtn" href="#" target="_blank" rel="noopener" hidden>LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>© <span id="year"></span> Vitor Hugo Ramos</span>
+  <span class="muted">HTML, CSS e JavaScript puros · sem frameworks</span>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caça-Bug — encontre a linha culpada</title>
+<meta name="description" content="Jogo de localização de falhas em C#: leia o relato do defeito e aponte a linha culpada. Pontuação em Top-1, Top-3 e MRR.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  .wrap { position: relative; z-index: 1; width: min(940px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 60px; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 34px; }
+  .top a { color: var(--muted); font-size: 15px; }
+  .top a:hover { color: var(--a1); }
+  .screen[hidden] { display: none; }
+  .intro h1 { font-size: clamp(52px, 10vw, 104px); margin-bottom: 18px; }
+  .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 30px 0; }
+  .rule { padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+  .rule b { display: block; font-family: var(--mono); color: var(--a1); margin-bottom: 6px; }
+  .rule span { color: var(--muted); font-size: 15px; }
+  .hud { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; font-family: var(--mono); font-size: 13.5px; }
+  .pill { padding: 6px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--muted); }
+  .pill b { color: var(--text); }
+  .lives { margin-left: auto; letter-spacing: 3px; font-size: 17px; }
+  .progress { height: 4px; border-radius: 4px; background: var(--bg-2); overflow: hidden; margin-bottom: 22px; }
+  .progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--a1), var(--a2)); transition: width .4s; }
+  .issue { padding: 20px 22px; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--danger); border-radius: 14px; margin-bottom: 16px; }
+  .issue small { font-family: var(--mono); color: var(--danger); letter-spacing: .06em; text-transform: uppercase; font-size: 12px; }
+  .issue h2 { margin: 4px 0 6px; font-size: 21px; letter-spacing: -.02em; }
+  .issue p { margin: 0; color: var(--muted); font-size: 15.5px; }
+  .code { background: #0b0d14; border: 1px solid #232738; border-radius: 14px; overflow-x: auto; padding: 10px 0; font-family: var(--mono); font-size: 14px; line-height: 1.5; color: #dfe4f2; }
+  .ln { display: flex; width: 100%; min-width: max-content; border: 0; background: none; color: inherit; font: inherit; text-align: left; padding: 2px 16px 2px 0; cursor: pointer; border-left: 3px solid transparent; }
+  .ln:hover:not(:disabled) { background: rgba(124, 155, 255, .13); border-left-color: #7c9bff; }
+  .ln:disabled { cursor: default; }
+  .ln .n { width: 46px; flex: none; text-align: right; padding-right: 16px; color: #5b6178; user-select: none; }
+  .ln .t { white-space: pre; }
+  .ln.wrong { background: rgba(255, 107, 129, .14); border-left-color: #ff6b81; }
+  .ln.wrong .t { text-decoration: line-through; text-decoration-color: rgba(255, 107, 129, .6); }
+  .ln.right { background: rgba(110, 243, 192, .16); border-left-color: #6ef3c0; }
+  .ln.shake { animation: shake .35s; }
+  @keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+  .kw { color: #c58bff; } .ty { color: #5ed3f3; } .st { color: #f2a65a; } .cm { color: #5b6178; font-style: italic; } .nu { color: #e8d44d; }
+  .feedback { margin-top: 16px; padding: 20px 22px; border-radius: 14px; border: 1px solid var(--line); background: var(--card); }
+  .feedback[hidden] { display: none; }
+  .feedback h3 { margin: 0 0 6px; font-size: 19px; }
+  .feedback p { margin: 0 0 14px; color: var(--muted); font-size: 15.5px; }
+  .feedback code { white-space: pre-wrap; }
+  .result { text-align: center; }
+  .result h1 { font-size: clamp(42px, 8vw, 84px); margin-bottom: 8px; }
+  .scores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 30px 0 20px; }
+  .rounds { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+  .rounds span { font-family: var(--mono); font-size: 13px; padding: 6px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); }
+  .rounds .ok { border-color: var(--a1); color: var(--a1); }
+  .rounds .no { border-color: var(--danger); color: var(--danger); }
+  @media (max-width: 700px) { .rules, .scores { grid-template-columns: 1fr; } .code { font-size: 12.5px; } }
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+<div class="wrap">
+  <div class="top">
+    <a href="../">← voltar ao portfólio</a>
+    <span class="brand"><span class="brand-mark">caça</span><span class="brand-dot">-</span>bug</span>
+  </div>
+
+  <!-- INTRO -->
+  <section class="screen intro" id="intro">
+    <p class="kicker">Um jogo de localização de falhas</p>
+    <h1>Ache a linha<br><span class="grad">culpada.</span></h1>
+    <p class="lead">Antes de corrigir um bug, alguém precisa descobrir onde ele está. No meu TCC, quem tenta é um modelo de linguagem. Aqui, é você.</p>
+    <div class="rules">
+      <div class="rule"><b>01 · leia</b><span>Cada rodada traz o relato de um defeito e um trecho de C#.</span></div>
+      <div class="rule"><b>02 · aponte</b><span>Clique na linha que causa o problema. Você tem 3 palpites.</span></div>
+      <div class="rule"><b>03 · meça</b><span>Acertar de primeira vale 1; na segunda, 1/2; na terceira, 1/3. A média é o seu MRR.</span></div>
+    </div>
+    <div class="cta">
+      <button class="btn primary" id="startBtn" type="button">Começar</button>
+      <span class="pill" id="bestPill" hidden></span>
+    </div>
+  </section>
+
+  <!-- JOGO -->
+  <section class="screen" id="game" hidden>
+    <div class="hud">
+      <span class="pill">rodada <b id="hudRound">1</b>/<span id="hudTotal">6</span></span>
+      <span class="pill">MRR parcial <b id="hudMrr">—</b></span>
+      <span class="lives" id="lives" aria-label="Palpites restantes"></span>
+    </div>
+    <div class="progress"><i id="bar"></i></div>
+    <div class="issue">
+      <small id="issueId"></small>
+      <h2 id="issueTitle"></h2>
+      <p id="issueBody"></p>
+    </div>
+    <div class="code" id="code" role="group" aria-label="Trecho de código: selecione a linha com defeito"></div>
+    <div class="feedback" id="feedback" hidden aria-live="polite">
+      <h3 id="fbTitle"></h3>
+      <p id="fbText"></p>
+      <button class="btn primary" id="nextBtn" type="button">Próxima →</button>
+    </div>
+  </section>
+
+  <!-- RESULTADO -->
+  <section class="screen result" id="result" hidden>
+    <p class="kicker">Resultado</p>
+    <h1 id="resTitle"></h1>
+    <p class="lead" style="margin-inline:auto" id="resText"></p>
+    <div class="scores">
+      <div class="stat"><b id="resMrr">0</b><span>MRR</span></div>
+      <div class="stat"><b id="resTop1">0</b><span>Top-1 (de primeira)</span></div>
+      <div class="stat"><b id="resTop3">0</b><span>Top-3 (em até 3)</span></div>
+    </div>
+    <div class="rounds" id="resRounds"></div>
+    <div class="cta center">
+      <button class="btn primary" id="againBtn" type="button">Jogar de novo</button>
+      <a class="btn" href="../#pesquisa">Conhecer a pesquisa</a>
+    </div>
+  </section>
+</div>
+
+<script>
+/* Cada desafio: relato + código C#; bug = índice (base 0) da linha culpada. */
+const CHALLENGES = [
+  {
+    title: 'Erro ao fechar pedido com mais de um item',
+    body: 'Ao confirmar o pedido, o sistema lança ArgumentOutOfRangeException. Com o carrinho vazio também falha.',
+    code: [
+      'public decimal CalcularTotal(List<ItemPedido> itens)',
+      '{',
+      '    decimal total = 0;',
+      '    for (int i = 0; i <= itens.Count; i++)',
+      '    {',
+      '        var item = itens[i];',
+      '        total += item.Quantidade * item.PrecoUnitario;',
+      '    }',
+      '    return total;',
+      '}',
+    ],
+    bug: 3,
+    why: 'O laço usa <= em vez de <, então tenta ler itens[itens.Count], uma posição que não existe. A exceção estoura na linha 6, mas a causa está na condição do for.',
+  },
+  {
+    title: 'Desconto de 15% não é aplicado',
+    body: 'O cliente tem 15% de desconto cadastrado, mas a nota sai com o valor cheio. Com desconto de 100% funciona.',
+    code: [
+      'public decimal AplicarDesconto(decimal valor, int percentual)',
+      '{',
+      '    if (percentual < 0 || percentual > 100)',
+      '        throw new ArgumentException("Percentual inválido");',
+      '',
+      '    var fator = percentual / 100;',
+      '    var desconto = valor * fator;',
+      '    return valor - desconto;',
+      '}',
+    ],
+    bug: 5,
+    why: 'percentual e 100 são inteiros: 15 / 100 dá 0 na divisão inteira. Só 100 / 100 resulta em 1 — por isso o desconto total "funciona". O correto seria percentual / 100m.',
+  },
+  {
+    title: 'Saldo aumenta depois de uma venda',
+    body: 'Após faturar 10 unidades, o estoque do produto subiu de 50 para 60. A entrada de mercadoria está correta.',
+    code: [
+      'public void RegistrarMovimento(Produto produto, decimal qtd, TipoMovimento tipo)',
+      '{',
+      '    if (qtd <= 0)',
+      '        throw new ArgumentException("Quantidade deve ser positiva");',
+      '',
+      '    if (tipo == TipoMovimento.Saida && produto.Saldo < qtd)',
+      '        throw new InvalidOperationException("Saldo insuficiente");',
+      '',
+      '    var sinal = tipo == TipoMovimento.Entrada ? 1 : 1;',
+      '    produto.Saldo += qtd * sinal;',
+      '    _repositorio.Salvar(produto);',
+      '}',
+    ],
+    bug: 8,
+    why: 'O ternário devolve 1 nos dois ramos; a saída deveria usar -1. A linha 10 só aplica o sinal que recebeu — o defeito nasce uma linha antes.',
+  },
+  {
+    title: 'NullReferenceException ao emitir etiqueta',
+    body: 'Clientes sem endereço cadastrado derrubam a emissão da etiqueta de envio, mesmo existindo uma validação para isso.',
+    code: [
+      'public string MontarEtiqueta(Cliente cliente)',
+      '{',
+      '    if (cliente == null)',
+      '        return string.Empty;',
+      '',
+      '    if (cliente.Endereco.Cidade == null || cliente.Endereco == null)',
+      '        return cliente.Nome;',
+      '',
+      '    return $"{cliente.Nome} - {cliente.Endereco.Cidade}";',
+      '}',
+    ],
+    bug: 5,
+    why: 'A ordem das condições está invertida: Endereco.Cidade é lido antes de verificar se Endereco é nulo. O || avalia da esquerda para a direita, então a validação nunca protege.',
+  },
+  {
+    title: 'Primeira página da listagem pula registros',
+    body: 'Na tela de consulta, a página 1 começa no 11º registro. Os dez primeiros clientes nunca aparecem.',
+    code: [
+      'public List<Cliente> Listar(int pagina, int tamanho = 10)',
+      '{',
+      '    // pagina começa em 1 na interface',
+      '    if (pagina < 1) pagina = 1;',
+      '',
+      '    return _contexto.Clientes',
+      '        .OrderBy(c => c.Nome)',
+      '        .Skip(pagina * tamanho)',
+      '        .Take(tamanho)',
+      '        .ToList();',
+      '}',
+    ],
+    bug: 7,
+    why: 'Como a página começa em 1, Skip(pagina * tamanho) pula 10 registros logo na primeira. O correto é Skip((pagina - 1) * tamanho).',
+  },
+  {
+    title: 'Lotes válidos bloqueados como vencidos',
+    body: 'O faturamento recusa lotes com validade para o ano que vem e deixa passar lotes vencidos há meses.',
+    code: [
+      'public bool PodeFaturar(Lote lote, DateTime hoje)',
+      '{',
+      '    if (lote.Bloqueado)',
+      '        return false;',
+      '',
+      '    bool vencido = lote.Validade.Date > hoje.Date;',
+      '    if (vencido)',
+      '    {',
+      '        _log.Aviso($"Lote {lote.Numero} vencido");',
+      '        return false;',
+      '    }',
+      '    return lote.Saldo > 0;',
+      '}',
+    ],
+    bug: 5,
+    why: 'A comparação está invertida: um lote está vencido quando a validade é anterior a hoje (<), não posterior (>).',
+  },
+];
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+const KW = /\b(public|private|void|return|if|for|var|new|throw|int|decimal|bool|string|null)\b/g;
+const TY = /\b(List|ItemPedido|Produto|TipoMovimento|Cliente|Lote|DateTime|ArgumentException|InvalidOperationException)\b/g;
+
+function highlight(line) {
+  const ci = line.indexOf('//');
+  let code = ci >= 0 ? line.slice(0, ci) : line;
+  const cm = ci >= 0 ? line.slice(ci) : '';
+  const parts = code.split(/(\$?"[^"]*")/);
+  code = parts.map((p, i) => i % 2
+    ? `<span class="st">${esc(p)}</span>`
+    : esc(p).replace(KW, '<span class="kw">$1</span>').replace(TY, '<span class="ty">$1</span>').replace(/\b(\d+)\b/g, '<span class="nu">$1</span>')).join('');
+  return code + (cm ? `<span class="cm">${esc(cm)}</span>` : '');
+}
+
+let order = [], round = 0, guesses = 0, rr = [], locked = false;
+
+function show(id) { ['intro', 'game', 'result'].forEach((s) => { $('#' + s).hidden = s !== id; }); scrollTo(0, 0); }
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+function start() {
+  order = shuffle(CHALLENGES.map((_, i) => i));
+  round = 0; rr = [];
+  show('game');
+  load();
+}
+
+function load() {
+  const c = CHALLENGES[order[round]];
+  guesses = 0; locked = false;
+  $('#hudRound').textContent = round + 1;
+  $('#hudTotal').textContent = order.length;
+  $('#hudMrr').textContent = rr.length ? (rr.reduce((a, b) => a + b, 0) / rr.length).toFixed(2) : '—';
+  $('#bar').style.width = (round / order.length) * 100 + '%';
+  $('#issueId').textContent = 'issue #' + (1040 + order[round] * 7);
+  $('#issueTitle').textContent = c.title;
+  $('#issueBody').textContent = c.body;
+  $('#feedback').hidden = true;
+  lives();
+  $('#code').innerHTML = c.code.map((l, i) => {
+    const blank = !l.trim() || /^\s*[{}]\s*$/.test(l);
+    return `<button class="ln" data-i="${i}" ${blank ? 'disabled tabindex="-1"' : ''} aria-label="Linha ${i + 1}"><span class="n">${i + 1}</span><span class="t">${highlight(l) || ' '}</span></button>`;
+  }).join('');
+}
+
+function lives() { $('#lives').textContent = '●'.repeat(3 - guesses) + '○'.repeat(guesses); }
+
+$('#code').addEventListener('click', (e) => {
+  const b = e.target.closest('.ln');
+  if (!b || locked || b.disabled) return;
+  const c = CHALLENGES[order[round]];
+  guesses++;
+  lives();
+  if (+b.dataset.i === c.bug) { b.classList.add('right'); finish(true); }
+  else {
+    b.classList.add('wrong', 'shake'); b.disabled = true;
+    if (guesses >= 3) finish(false);
+  }
+});
+
+function finish(hit) {
+  locked = true;
+  const c = CHALLENGES[order[round]];
+  document.querySelectorAll('.ln').forEach((l) => { l.disabled = true; });
+  const right = document.querySelector(`.ln[data-i="${c.bug}"]`);
+  right.classList.add('right');
+  rr.push(hit ? 1 / guesses : 0);
+  $('#fbTitle').textContent = hit
+    ? ['Na mosca! 🎯 Acertou de primeira (+1,00)', 'Achou no 2º palpite (+0,50)', 'Achou no 3º palpite (+0,33)'][guesses - 1]
+    : `Escapou… o defeito estava na linha ${c.bug + 1} (+0,00)`;
+  $('#fbText').textContent = c.why;
+  $('#nextBtn').textContent = round + 1 < order.length ? 'Próxima →' : 'Ver resultado →';
+  $('#feedback').hidden = false;
+  $('#hudMrr').textContent = (rr.reduce((a, b) => a + b, 0) / rr.length).toFixed(2);
+  $('#bar').style.width = ((round + 1) / order.length) * 100 + '%';
+  $('#nextBtn').focus({ preventScroll: true });
+  $('#feedback').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+$('#nextBtn').addEventListener('click', () => {
+  round++;
+  if (round < order.length) { load(); scrollTo(0, 0); } else end();
+});
+
+function end() {
+  const n = rr.length;
+  const mrr = rr.reduce((a, b) => a + b, 0) / n;
+  const top1 = rr.filter((v) => v === 1).length, top3 = rr.filter((v) => v > 0).length;
+  $('#resMrr').textContent = mrr.toFixed(3).replace('.', ',');
+  $('#resTop1').textContent = `${top1}/${n}`;
+  $('#resTop3').textContent = `${top3}/${n}`;
+  $('#resTitle').innerHTML = mrr >= .9 ? 'Depurador <span class="grad">nato.</span>' : mrr >= .6 ? 'Bom <span class="grad">faro.</span>' : mrr >= .3 ? 'Quase <span class="grad">lá.</span>' : 'Os bugs <span class="grad">venceram.</span>';
+  $('#resText').textContent = mrr >= .9
+    ? 'Você localizou quase tudo de primeira. Em bases reais, com milhares de arquivos e sem testes, a história é bem mais difícil — é isso que a pesquisa mede.'
+    : 'Repare: eram trechos de dez linhas, com o relato na mão. Agora imagine a mesma tarefa em um sistema legado com milhares de arquivos — é isso que a pesquisa mede nos LLMs.';
+  $('#resRounds').innerHTML = rr.map((v, i) => `<span class="${v ? 'ok' : 'no'}">#${i + 1} · ${v ? '1/' + Math.round(1 / v) : '✕'}</span>`).join('');
+  try {
+    const best = +localStorage.getItem('cacabug-best') || 0;
+    if (mrr > best) localStorage.setItem('cacabug-best', mrr);
+  } catch { /* sem armazenamento */ }
+  show('result');
+}
+
+try {
+  const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t;
+  const best = +localStorage.getItem('cacabug-best');
+  if (best) { $('#bestPill').hidden = false; $('#bestPill').innerHTML = `seu melhor MRR: <b>${best.toFixed(3).replace('.', ',')}</b>`; }
+} catch { /* sem armazenamento */ }
+
+$('#startBtn').addEventListener('click', start);
+$('#againBtn').addEventListener('click', start);
+addEventListener('pointermove', (e) => { document.body.style.setProperty('--mx', e.clientX + 'px'); document.body.style.setProperty('--my', e.clientY + 'px'); }, { passive: true });
+</script>
+</body>
+</html>
